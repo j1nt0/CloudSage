@@ -11,6 +11,14 @@
 		3C31A45D2C61328D00A6D1F5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A45C2C61328D00A6D1F5 /* ContentView.swift */; };
 		3C31A45F2C61328F00A6D1F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C31A45E2C61328F00A6D1F5 /* Assets.xcassets */; };
 		3C31A4622C61328F00A6D1F5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C31A4612C61328F00A6D1F5 /* Preview Assets.xcassets */; };
+		3C31A4692C613F8600A6D1F5 /* TypeWriterTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4682C613F8600A6D1F5 /* TypeWriterTextView.swift */; };
+		3C31A4712C6262BB00A6D1F5 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4702C6262BB00A6D1F5 /* OnBoardingView.swift */; };
+		3C31A4772C62641B00A6D1F5 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4762C62641B00A6D1F5 /* MainView.swift */; };
+		3C31A47A2C6264D100A6D1F5 /* CornerRadiusExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4792C6264D100A6D1F5 /* CornerRadiusExtension.swift */; };
+		3C31A47F2C626E9400A6D1F5 /* BeardDesignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A47E2C626E9400A6D1F5 /* BeardDesignView.swift */; };
+		3C31A4822C62B55300A6D1F5 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4812C62B55300A6D1F5 /* MainViewModel.swift */; };
+		3C31A4872C63A52B00A6D1F5 /* BeardDesignViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4862C63A52B00A6D1F5 /* BeardDesignViewModel.swift */; };
+		3C31A4892C63BB3600A6D1F5 /* Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4882C63BB3600A6D1F5 /* Skin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +27,14 @@
 		3C31A45C2C61328D00A6D1F5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3C31A45E2C61328F00A6D1F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C31A4612C61328F00A6D1F5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3C31A4682C613F8600A6D1F5 /* TypeWriterTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeWriterTextView.swift; sourceTree = "<group>"; };
+		3C31A4702C6262BB00A6D1F5 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
+		3C31A4762C62641B00A6D1F5 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		3C31A4792C6264D100A6D1F5 /* CornerRadiusExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusExtension.swift; sourceTree = "<group>"; };
+		3C31A47E2C626E9400A6D1F5 /* BeardDesignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeardDesignView.swift; sourceTree = "<group>"; };
+		3C31A4812C62B55300A6D1F5 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		3C31A4862C63A52B00A6D1F5 /* BeardDesignViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeardDesignViewModel.swift; sourceTree = "<group>"; };
+		3C31A4882C63BB3600A6D1F5 /* Skin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skin.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +67,11 @@
 		3C31A4592C61328D00A6D1F5 /* CloudSage */ = {
 			isa = PBXGroup;
 			children = (
-				3C31A45A2C61328D00A6D1F5 /* CloudSageApp.swift */,
-				3C31A45C2C61328D00A6D1F5 /* ContentView.swift */,
+				3C31A4852C6398DF00A6D1F5 /* Models */,
+				3C31A4782C6264B600A6D1F5 /* Extension */,
+				3C31A4732C62636300A6D1F5 /* App */,
+				3C31A4802C62B53900A6D1F5 /* ViewModels */,
+				3C31A4722C62632F00A6D1F5 /* Views */,
 				3C31A45E2C61328F00A6D1F5 /* Assets.xcassets */,
 				3C31A4602C61328F00A6D1F5 /* Preview Content */,
 			);
@@ -65,6 +84,91 @@
 				3C31A4612C61328F00A6D1F5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3C31A4722C62632F00A6D1F5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3C31A47D2C626E6C00A6D1F5 /* BeardTrack */,
+				3C31A47C2C626E3300A6D1F5 /* BeardOverview */,
+				3C31A47B2C626E2500A6D1F5 /* BeardDesign */,
+				3C31A4752C62640D00A6D1F5 /* Main */,
+				3C31A4742C62638A00A6D1F5 /* Onboarding */,
+				3C31A45C2C61328D00A6D1F5 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3C31A4732C62636300A6D1F5 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				3C31A45A2C61328D00A6D1F5 /* CloudSageApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		3C31A4742C62638A00A6D1F5 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				3C31A4702C6262BB00A6D1F5 /* OnBoardingView.swift */,
+				3C31A4682C613F8600A6D1F5 /* TypeWriterTextView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		3C31A4752C62640D00A6D1F5 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				3C31A4762C62641B00A6D1F5 /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		3C31A4782C6264B600A6D1F5 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3C31A4792C6264D100A6D1F5 /* CornerRadiusExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		3C31A47B2C626E2500A6D1F5 /* BeardDesign */ = {
+			isa = PBXGroup;
+			children = (
+				3C31A47E2C626E9400A6D1F5 /* BeardDesignView.swift */,
+			);
+			path = BeardDesign;
+			sourceTree = "<group>";
+		};
+		3C31A47C2C626E3300A6D1F5 /* BeardOverview */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BeardOverview;
+			sourceTree = "<group>";
+		};
+		3C31A47D2C626E6C00A6D1F5 /* BeardTrack */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BeardTrack;
+			sourceTree = "<group>";
+		};
+		3C31A4802C62B53900A6D1F5 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				3C31A4812C62B55300A6D1F5 /* MainViewModel.swift */,
+				3C31A4862C63A52B00A6D1F5 /* BeardDesignViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		3C31A4852C6398DF00A6D1F5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3C31A4882C63BB3600A6D1F5 /* Skin.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +242,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C31A45D2C61328D00A6D1F5 /* ContentView.swift in Sources */,
+				3C31A4872C63A52B00A6D1F5 /* BeardDesignViewModel.swift in Sources */,
 				3C31A45B2C61328D00A6D1F5 /* CloudSageApp.swift in Sources */,
+				3C31A47F2C626E9400A6D1F5 /* BeardDesignView.swift in Sources */,
+				3C31A47A2C6264D100A6D1F5 /* CornerRadiusExtension.swift in Sources */,
+				3C31A4712C6262BB00A6D1F5 /* OnBoardingView.swift in Sources */,
+				3C31A4772C62641B00A6D1F5 /* MainView.swift in Sources */,
+				3C31A4692C613F8600A6D1F5 /* TypeWriterTextView.swift in Sources */,
+				3C31A4892C63BB3600A6D1F5 /* Skin.swift in Sources */,
+				3C31A4822C62B55300A6D1F5 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,7 +309,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -254,7 +366,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -275,11 +387,13 @@
 				DEVELOPMENT_TEAM = C5ZC74W3Z4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "구름영감";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,11 +418,13 @@
 				DEVELOPMENT_TEAM = C5ZC74W3Z4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "구름영감";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

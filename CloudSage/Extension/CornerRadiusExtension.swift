@@ -5,6 +5,7 @@
 //  Created by Jin Lee on 8/6/24.
 //
 
+// 사각형의 꼭짓점을 각각 둥글게 할 수 있는 익스텐션
 import SwiftUI
 
 extension View {

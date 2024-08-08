@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C18B1902C64F18700C4C1CA /* BeardOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C18B18F2C64F18700C4C1CA /* BeardOverviewViewModel.swift */; };
 		3C31A45B2C61328D00A6D1F5 /* CloudSageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A45A2C61328D00A6D1F5 /* CloudSageApp.swift */; };
 		3C31A45D2C61328D00A6D1F5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A45C2C61328D00A6D1F5 /* ContentView.swift */; };
 		3C31A45F2C61328F00A6D1F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C31A45E2C61328F00A6D1F5 /* Assets.xcassets */; };
@@ -19,9 +20,17 @@
 		3C31A4822C62B55300A6D1F5 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4812C62B55300A6D1F5 /* MainViewModel.swift */; };
 		3C31A4872C63A52B00A6D1F5 /* BeardDesignViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4862C63A52B00A6D1F5 /* BeardDesignViewModel.swift */; };
 		3C31A4892C63BB3600A6D1F5 /* Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4882C63BB3600A6D1F5 /* Skin.swift */; };
+		3C31A48B2C63E59400A6D1F5 /* Cloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A48A2C63E59400A6D1F5 /* Cloud.swift */; };
+		3C31A48D2C63E94500A6D1F5 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A48C2C63E94500A6D1F5 /* CameraView.swift */; };
+		3C31A48F2C63F18A00A6D1F5 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A48E2C63F18A00A6D1F5 /* CameraViewModel.swift */; };
+		3C31A4912C63F74600A6D1F5 /* TrackResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4902C63F74600A6D1F5 /* TrackResultView.swift */; };
+		3C31A4932C63FAF900A6D1F5 /* ToSquareImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4922C63FAF900A6D1F5 /* ToSquareImageExtension.swift */; };
+		3C31A4962C64D26000A6D1F5 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4952C64D26000A6D1F5 /* HapticManager.swift */; };
+		3C31A4982C64D8C800A6D1F5 /* BeardOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4972C64D8C800A6D1F5 /* BeardOverviewView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C18B18F2C64F18700C4C1CA /* BeardOverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeardOverviewViewModel.swift; sourceTree = "<group>"; };
 		3C31A4572C61328D00A6D1F5 /* CloudSage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudSage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C31A45A2C61328D00A6D1F5 /* CloudSageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudSageApp.swift; sourceTree = "<group>"; };
 		3C31A45C2C61328D00A6D1F5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -35,6 +44,13 @@
 		3C31A4812C62B55300A6D1F5 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		3C31A4862C63A52B00A6D1F5 /* BeardDesignViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeardDesignViewModel.swift; sourceTree = "<group>"; };
 		3C31A4882C63BB3600A6D1F5 /* Skin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skin.swift; sourceTree = "<group>"; };
+		3C31A48A2C63E59400A6D1F5 /* Cloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloud.swift; sourceTree = "<group>"; };
+		3C31A48C2C63E94500A6D1F5 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		3C31A48E2C63F18A00A6D1F5 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
+		3C31A4902C63F74600A6D1F5 /* TrackResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackResultView.swift; sourceTree = "<group>"; };
+		3C31A4922C63FAF900A6D1F5 /* ToSquareImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToSquareImageExtension.swift; sourceTree = "<group>"; };
+		3C31A4952C64D26000A6D1F5 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		3C31A4972C64D8C800A6D1F5 /* BeardOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeardOverviewView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +83,7 @@
 		3C31A4592C61328D00A6D1F5 /* CloudSage */ = {
 			isa = PBXGroup;
 			children = (
+				3C31A4942C64D24400A6D1F5 /* Manager */,
 				3C31A4852C6398DF00A6D1F5 /* Models */,
 				3C31A4782C6264B600A6D1F5 /* Extension */,
 				3C31A4732C62636300A6D1F5 /* App */,
@@ -128,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				3C31A4792C6264D100A6D1F5 /* CornerRadiusExtension.swift */,
+				3C31A4922C63FAF900A6D1F5 /* ToSquareImageExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -143,6 +161,7 @@
 		3C31A47C2C626E3300A6D1F5 /* BeardOverview */ = {
 			isa = PBXGroup;
 			children = (
+				3C31A4972C64D8C800A6D1F5 /* BeardOverviewView.swift */,
 			);
 			path = BeardOverview;
 			sourceTree = "<group>";
@@ -150,6 +169,8 @@
 		3C31A47D2C626E6C00A6D1F5 /* BeardTrack */ = {
 			isa = PBXGroup;
 			children = (
+				3C31A48C2C63E94500A6D1F5 /* CameraView.swift */,
+				3C31A4902C63F74600A6D1F5 /* TrackResultView.swift */,
 			);
 			path = BeardTrack;
 			sourceTree = "<group>";
@@ -159,6 +180,8 @@
 			children = (
 				3C31A4812C62B55300A6D1F5 /* MainViewModel.swift */,
 				3C31A4862C63A52B00A6D1F5 /* BeardDesignViewModel.swift */,
+				3C31A48E2C63F18A00A6D1F5 /* CameraViewModel.swift */,
+				3C18B18F2C64F18700C4C1CA /* BeardOverviewViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -167,8 +190,17 @@
 			isa = PBXGroup;
 			children = (
 				3C31A4882C63BB3600A6D1F5 /* Skin.swift */,
+				3C31A48A2C63E59400A6D1F5 /* Cloud.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		3C31A4942C64D24400A6D1F5 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				3C31A4952C64D26000A6D1F5 /* HapticManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,16 +273,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C18B1902C64F18700C4C1CA /* BeardOverviewViewModel.swift in Sources */,
 				3C31A45D2C61328D00A6D1F5 /* ContentView.swift in Sources */,
+				3C31A4912C63F74600A6D1F5 /* TrackResultView.swift in Sources */,
 				3C31A4872C63A52B00A6D1F5 /* BeardDesignViewModel.swift in Sources */,
+				3C31A48B2C63E59400A6D1F5 /* Cloud.swift in Sources */,
+				3C31A48D2C63E94500A6D1F5 /* CameraView.swift in Sources */,
 				3C31A45B2C61328D00A6D1F5 /* CloudSageApp.swift in Sources */,
 				3C31A47F2C626E9400A6D1F5 /* BeardDesignView.swift in Sources */,
+				3C31A4982C64D8C800A6D1F5 /* BeardOverviewView.swift in Sources */,
 				3C31A47A2C6264D100A6D1F5 /* CornerRadiusExtension.swift in Sources */,
 				3C31A4712C6262BB00A6D1F5 /* OnBoardingView.swift in Sources */,
 				3C31A4772C62641B00A6D1F5 /* MainView.swift in Sources */,
 				3C31A4692C613F8600A6D1F5 /* TypeWriterTextView.swift in Sources */,
 				3C31A4892C63BB3600A6D1F5 /* Skin.swift in Sources */,
+				3C31A4932C63FAF900A6D1F5 /* ToSquareImageExtension.swift in Sources */,
 				3C31A4822C62B55300A6D1F5 /* MainViewModel.swift in Sources */,
+				3C31A48F2C63F18A00A6D1F5 /* CameraViewModel.swift in Sources */,
+				3C31A4962C64D26000A6D1F5 /* HapticManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +428,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "구름영감";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -419,6 +461,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "구름영감";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

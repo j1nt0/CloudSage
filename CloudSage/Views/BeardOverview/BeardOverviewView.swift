@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BeardOverviewView: View {
     
-    var cloudData: CloudData
+    @State var cloudData: CloudData
     var vm: MainViewModel
     @State var bovm = BeardOverviewViewModel()
     
@@ -28,10 +28,11 @@ struct BeardOverviewView: View {
                 SaveButton(isWhat: $bovm.doYouWantChange)
                     .padding(.bottom, 15)
             }
+            CustomBeardView(clouds: $cloudData.clouds)
             doYouWantChangeView()
         }
     }
-    func BeardBlock(cloud: UIImage) -> some View {
+    func BeardBlock(cloud: Cloud) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: 13)
                 .foregroundStyle(.whiteShadow)
@@ -40,11 +41,17 @@ struct BeardOverviewView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 13)
                     .foregroundStyle(.white)
-                Image(uiImage: cloud)
+                Image(uiImage: cloud.image!)
                     .resizable()
                     .clipShape(RoundedRectangle(cornerRadius: 13))
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 78, height: 78)
+                if cloud.isShow {
+                    Circle()
+                        .foregroundStyle(.red)
+                        .frame(width: 15)
+                        .offset(x: 25, y: -25)
+                }
             }
             .frame(width: 78, height: 78)
         }
@@ -59,10 +66,15 @@ struct BeardOverviewView: View {
                         ForEach(0..<2) { columnIndex in
                             let itemIndex = rowIndex * 2 + columnIndex
                             if itemIndex < cloudData.clouds.count {
-                                BeardBlock(cloud: cloudData.clouds[itemIndex].image!)
+                                BeardBlock(cloud: cloudData.clouds[itemIndex])
                                     .onTapGesture {
-//                                        bdvm.selectedSkin = bdvm.skinData.skins[itemIndex]
-                                        print("검거")
+                                        // MARK: 아이템들이 나오게끔
+                                        if cloudData.clouds[itemIndex].isShow {
+                                            cloudData.clouds[itemIndex].isShow = false
+                                            cloudData.clouds[itemIndex].imagePosition = CGPoint(x: 50, y: 50)
+                                        } else {
+                                            cloudData.clouds[itemIndex].isShow = true
+                                        }
                                     }
                             }
                         }
@@ -124,6 +136,34 @@ struct BeardOverviewView: View {
                 }
                     .frame(height: 194)
                     .padding(.horizontal, 15)
+            }
+        }
+    }
+}
+
+func CustomBeardView(clouds: Binding<[Cloud]>) -> some View {
+    ZStack {
+        ForEach(clouds.wrappedValue.indices, id: \.self) { index in
+            let cloud = clouds.wrappedValue[index]
+            if cloud.isShow {
+                Image(uiImage: cloud.image!)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 100)
+                    .offset(x: cloud.imagePosition.x + cloud.dragOffset.width, y: cloud.imagePosition.y + cloud.dragOffset.height)
+                    .gesture(
+                        DragGesture()
+                            .onChanged { value in
+                                // 드래그가 진행될 때 이미지의 위치를 업데이트
+                                clouds.wrappedValue[index].dragOffset = value.translation
+                            }
+                            .onEnded { value in
+                                // 드래그가 끝나면 최종 위치를 저장
+                                clouds.wrappedValue[index].imagePosition.x += clouds.wrappedValue[index].dragOffset.width
+                                clouds.wrappedValue[index].imagePosition.y += clouds.wrappedValue[index].dragOffset.height
+                                clouds.wrappedValue[index].dragOffset = .zero
+                            }
+                    )
             }
         }
     }

@@ -23,6 +23,9 @@ struct Cloud {
         }
     }
     var imageData: Data?
+    var isShow: Bool = false
+    var imagePosition = CGPoint(x: 50, y: 50)
+    var dragOffset = CGSize.zero
 }
 
 @Observable

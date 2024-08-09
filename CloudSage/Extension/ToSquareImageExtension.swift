@@ -35,6 +35,13 @@ extension UIImage {
             print("Successfully created cropped image")
         }
 
-        return croppedImage
+        return croppedImage?.resized(to: CGSize(width: 300, height: 300))
     }
+    func resized(to newSize: CGSize) -> UIImage? {
+            UIGraphicsBeginImageContextWithOptions(newSize, false, scale)
+            draw(in: CGRect(origin: .zero, size: newSize))
+            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return resizedImage
+        }
 }

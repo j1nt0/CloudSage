@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-struct Cloud {
+struct Cloud: Identifiable {
+    var id = UUID()
     var registrationDate: Date
     var image: UIImage? {
         get {
@@ -24,11 +25,44 @@ struct Cloud {
     }
     var imageData: Data?
     var isShow: Bool = false
-    var imagePosition = CGPoint(x: 50, y: 50)
+    var imagePosition = CGPoint(x: 8, y: 40)
     var dragOffset = CGSize.zero
+    var imagePositionReal = CGPoint(x: 8, y: 40)
+    var isShowReal: Bool = false
 }
 
 @Observable
 class CloudData {
     var clouds: [Cloud] = []
+    
+    func resetData() {
+        // Cloud 객체를 직접 수정하려면, 배열 내의 요소를 수정 가능한 값으로 처리해야 합니다.
+        clouds = clouds.map { cloud in
+            var mutableCloud = cloud
+            mutableCloud.isShow = false
+            return mutableCloud
+        }
+    }
+    
+    func fetchData() {
+        clouds = clouds.map { cloud in
+            var mutableCloud = cloud
+            mutableCloud.imagePosition = mutableCloud.imagePositionReal
+            mutableCloud.isShow = mutableCloud.isShowReal
+            return mutableCloud
+        }
+    }
+    
+    func updateData() {
+        clouds = clouds.map { cloud in
+            var mutableCloud = cloud
+            mutableCloud.imagePositionReal = mutableCloud.imagePosition
+            mutableCloud.isShowReal = mutableCloud.isShow
+            return mutableCloud
+        }
+    }
+    
+    func removeData(index: Int) {
+        clouds.remove(at: index)
+    }
 }

@@ -17,8 +17,11 @@ struct BeardDesignView: View {
         ZStack {
             Color.sky01.ignoresSafeArea()
             VStack(spacing: 0) {
-                CloudSageImage(skin: bdvm.selectedSkin ?? Skin(skinTitle: "수염이 없수염", skinString: "skinNone", isPremium: false))
-                    .padding(.top, 20)
+                ZStack {
+                    CloudSageDefaultImage()
+                    CloudSageSkinImage(skin: bdvm.selectedSkin ?? Skin(skinTitle: "수염이 없수염", skinString: "skinNone", isPremium: false))
+                }
+                .padding(.top, 20)
                 Ellipse()
                     .frame(width: 130, height: 40)
                     .foregroundStyle(.black).opacity(0.06)
@@ -165,12 +168,14 @@ func SaveButton(isWhat: Binding<Bool>) -> some View {
     .frame(width: 99, height: 54)
 }
 
-func CloudSageImage(skin: Skin) -> some View {
-    ZStack {
-        Image(.nonCloudSageLogo)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 300)
+func CloudSageDefaultImage() -> some View {
+    Image(.nonCloudSageLogo)
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+        .frame(width: 300)
+}
+
+func CloudSageSkinImage(skin: Skin) -> some View {
         if skin.skinString == "SkinNone" {
             Image("")
                 .resizable()
@@ -182,7 +187,6 @@ func CloudSageImage(skin: Skin) -> some View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 300)
         }
-    }
 }
 
 #Preview {

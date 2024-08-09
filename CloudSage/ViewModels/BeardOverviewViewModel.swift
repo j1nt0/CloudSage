@@ -10,4 +10,5 @@ import SwiftUI
 @Observable
 class BeardOverviewViewModel {
     var doYouWantChange: Bool = false
+    var doYouWantRemove: Bool = false
 }

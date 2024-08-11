@@ -17,14 +17,12 @@ struct MainView: View {
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
-                VStack(spacing: 0) {
-                    
+                VStack(spacing: 0) {                    
                     ZStack {
                         CloudSageDefaultImage()
                         CloudSageSkinImage(skin: vm.CloudSageSkin)
                         CustomBeardView(clouds: $cloudData.clouds)
                             .offset(y: 190)
-                        
                     }
                     .frame(maxWidth: .infinity)
                     .offset(y: 90)

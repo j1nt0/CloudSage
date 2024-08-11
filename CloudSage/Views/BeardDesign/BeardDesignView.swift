@@ -19,7 +19,7 @@ struct BeardDesignView: View {
             VStack(spacing: 0) {
                 ZStack {
                     CloudSageDefaultImage()
-                    CloudSageSkinImage(skin: bdvm.selectedSkin ?? Skin(skinTitle: "수염이 없수염", skinString: "skinNone", isPremium: false))
+                    CloudSageSkinImage(skin: bdvm.selectedSkin ?? Skin(skinTitle: "수염이 없수염", skinString: "skinNone", isPremium: false, isUnLock: true))
                 }
                 .padding(.top, 20)
                 Ellipse()

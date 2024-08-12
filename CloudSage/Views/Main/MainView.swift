@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MainView: View {
     
     var vm = MainViewModel()
     var cvm = CameraViewModel()
-    @State var cloudData = CloudData()
     @State var path = NavigationPath()
+    @Query var cloudDB: [CloudDB]
     
     var body: some View {
         NavigationStack(path: $path) {
@@ -21,7 +22,7 @@ struct MainView: View {
                     ZStack {
                         CloudSageDefaultImage()
                         CloudSageSkinImage(skin: vm.CloudSageSkin)
-                        CustomBeardView(clouds: $cloudData.clouds)
+                        CustomBeardView()
                             .offset(y: 190)
                     }
                     .frame(maxWidth: .infinity)
@@ -36,8 +37,8 @@ struct MainView: View {
                 .ignoresSafeArea()
                 VStack(spacing: 17) {
                     Spacer()
-                    MainButtonBox(text1: "날씨도 좋은데", text2: "내 수염 좀 찾아주시게.", goTo: CameraView(path: $path, cvm: cvm, cloudData: cloudData), goToValue: "BeardTrackView")
-                    MainButtonBox(text1: "이거 보시게", text2: "자네가 찾아준 수염이라네.", goTo: BeardOverviewView(cloudData: cloudData, vm: vm, path: $path), goToValue: "BeardOverviewView")
+                    MainButtonBox(text1: "날씨도 좋은데", text2: "내 수염 좀 찾아주시게.", goTo: CameraView(path: $path, cvm: cvm), goToValue: "BeardTrackView")
+                    MainButtonBox(text1: "이거 보시게", text2: "자네가 찾아준 수염이라네.", goTo: BeardOverviewView(vm: vm, path: $path), goToValue: "BeardOverviewView")
                     MainButtonBox(text1: "온 김에", text2: "내 옷장도 보고가게나.", goTo: BeardDesignView(vm: vm, path: $path), goToValue: "BeardDesignView")
                 }
                 .padding(.horizontal, 15)
@@ -45,19 +46,19 @@ struct MainView: View {
             }
             .navigationDestination(for: String.self) { value in
                 if value == "BeardTrackView" {
-                    CameraView(path: $path, cvm: cvm, cloudData: cloudData)
+                    CameraView(path: $path, cvm: cvm)
                 } else if value == "BeardOverviewView" {
-                    BeardOverviewView(cloudData: cloudData, vm: vm, path: $path)
+                    BeardOverviewView( vm: vm, path: $path)
                 } else if value == "BeardDesignView" {
                     BeardDesignView(vm: vm, path: $path)
                 }
             }
         }
     }
-    func CustomBeardView(clouds: Binding<[Cloud]>) -> some View {
+    func CustomBeardView() -> some View {
         ZStack {
-            ForEach(clouds.wrappedValue.indices, id: \.self) { index in
-                let cloud = clouds.wrappedValue[index]
+            ForEach(cloudDB[0].clouds.indices, id: \.self) { index in
+                let cloud = cloudDB[0].clouds[index]
                 if cloud.isShowReal {
                     Image(uiImage: cloud.image!)
                         .resizable()

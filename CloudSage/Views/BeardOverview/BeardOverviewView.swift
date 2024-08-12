@@ -6,14 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct BeardOverviewView: View {
     
-    @State var cloudData: CloudData
     var vm: MainViewModel
     @State var bovm = BeardOverviewViewModel()
     @Binding var path: NavigationPath
     @State var selectedRemoveCloudIndex: Int?
+    @Query var cloudDB: [CloudDB]
     
     var body: some View {
         ZStack {
@@ -33,12 +34,12 @@ struct BeardOverviewView: View {
                 SaveButton(isWhat: $bovm.doYouWantChange)
                     .padding(.bottom, 15)
             }
-            CustomBeardView(clouds: $cloudData.clouds)
+            CustomBeardView()
             doYouWantChangeView()
             doYouWantRemoveView(index: selectedRemoveCloudIndex ?? 0)
         }
         .onAppear {
-            cloudData.fetchData()
+            cloudDB[0].fetchData()
         }
     }
     func BeardBlock(cloud: Cloud) -> some View {
@@ -70,19 +71,19 @@ struct BeardOverviewView: View {
     func BeardBlockScrollView() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
-                ForEach(0..<cloudData.clouds.count) { rowIndex in
+                ForEach(0..<cloudDB[0].clouds.count) { rowIndex in
                     VStack(spacing: 4) {
                         ForEach(0..<2) { columnIndex in
                             let itemIndex = rowIndex * 2 + columnIndex
-                            if itemIndex < cloudData.clouds.count {
-                                BeardBlock(cloud: cloudData.clouds[itemIndex])
+                            if itemIndex < cloudDB[0].clouds.count {
+                                BeardBlock(cloud: cloudDB[0].clouds[itemIndex])
                                     .onTapGesture {
                                         // MARK: 아이템들이 나오게끔
-                                        if cloudData.clouds[itemIndex].isShow {
-                                            cloudData.clouds[itemIndex].isShow = false
-                                            cloudData.clouds[itemIndex].imagePosition = CGPoint(x: 50, y: 50)
+                                        if cloudDB[0].clouds[itemIndex].isShow {
+                                            cloudDB[0].clouds[itemIndex].isShow = false
+                                            cloudDB[0].clouds[itemIndex].imagePosition = CGPoint(x: 50, y: 50)
                                         } else {
-                                            cloudData.clouds[itemIndex].isShow = true
+                                            cloudDB[0].clouds[itemIndex].isShow = true
                                         }
                                     }
                                     .onLongPressGesture {
@@ -128,7 +129,7 @@ struct BeardOverviewView: View {
                             }
                             .frame(width: 165, height: 54)
                             .onTapGesture {
-                                cloudData.updateData()                                
+                                cloudDB[0].updateData()
                                 path = NavigationPath()
                             }
                             ZStack {
@@ -184,7 +185,7 @@ struct BeardOverviewView: View {
                             }
                             .frame(width: 165, height: 54)
                             .onTapGesture {
-                                cloudData.removeData(index: index)
+                                cloudDB[0].removeData(index: index)
                                 bovm.doYouWantRemove = false
                             }
                             ZStack {
@@ -230,10 +231,10 @@ struct BeardOverviewView: View {
             
         }
     }
-    func CustomBeardView(clouds: Binding<[Cloud]>) -> some View {
+    func CustomBeardView() -> some View {
         ZStack {
-            ForEach(clouds.wrappedValue.indices, id: \.self) { index in
-                let cloud = clouds.wrappedValue[index]
+            ForEach(cloudDB[0].clouds.indices, id: \.self) { index in
+                let cloud = cloudDB[0].clouds[index]
                 if cloud.isShow {
                     Image(uiImage: cloud.image!)
                         .resizable()
@@ -244,13 +245,13 @@ struct BeardOverviewView: View {
                             DragGesture()
                                 .onChanged { value in
                                     // 드래그가 진행될 때 이미지의 위치를 업데이트
-                                    clouds.wrappedValue[index].dragOffset = value.translation
+                                    cloudDB[0].clouds[index].dragOffset = value.translation
                                 }
                                 .onEnded { value in
                                     // 드래그가 끝나면 최종 위치를 저장
-                                    clouds.wrappedValue[index].imagePosition.x += clouds.wrappedValue[index].dragOffset.width
-                                    clouds.wrappedValue[index].imagePosition.y += clouds.wrappedValue[index].dragOffset.height
-                                    clouds.wrappedValue[index].dragOffset = .zero
+                                    cloudDB[0].clouds[index].imagePosition.x += cloudDB[0].clouds[index].dragOffset.width
+                                    cloudDB[0].clouds[index].imagePosition.y += cloudDB[0].clouds[index].dragOffset.height
+                                    cloudDB[0].clouds[index].dragOffset = .zero
                                 }
                         )
                 }
@@ -260,5 +261,5 @@ struct BeardOverviewView: View {
 }
 
 #Preview {
-    BeardOverviewView(cloudData: CloudData(), vm: MainViewModel(), path: .constant(NavigationPath()))
+    BeardOverviewView(vm: MainViewModel(), path: .constant(NavigationPath()))
 }

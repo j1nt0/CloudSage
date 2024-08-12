@@ -13,7 +13,7 @@ struct CameraView: View {
     @State private var image: UIImage?
     @Binding var path: NavigationPath
     var cvm: CameraViewModel
-    var cloudData: CloudData
+    
     
     var body: some View {
         VStack {
@@ -28,7 +28,7 @@ struct CameraView: View {
             }
         }
         .navigationDestination(for: UIImage.self) { image in
-            TrackResultView(cvm: cvm, cloudData: cloudData, path: $path)
+            TrackResultView(cvm: cvm, path: $path)
         }
         .navigationBarBackButtonHidden(true)
     }

@@ -11,4 +11,5 @@ import SwiftUI
 class BeardOverviewViewModel {
     var doYouWantChange: Bool = false
     var doYouWantRemove: Bool = false
+    var doYouWantRemoveAll: Bool = false
 }

@@ -7,6 +7,7 @@
 
 
 import SwiftUI
+import SwiftData
 
 struct TrackResultView: View {
     
@@ -14,6 +15,7 @@ struct TrackResultView: View {
     var cloudData: CloudData
     @Binding var path: NavigationPath
     @State var doYouWantRegister: Bool = false
+    @Query var cloudDB: [CloudDB]
     
     var body: some View {
         GeometryReader {
@@ -94,6 +96,7 @@ struct TrackResultView: View {
                             .frame(width: 165, height: 54)
                             .onTapGesture {
                                 cloudData.clouds.append(Cloud(registrationDate: Date(), imageData: cvm.sticker?.pngData() ?? cvm.selectedImage?.jpegData(compressionQuality: 0.5 )))
+                                cloudDB[0].clouds.append(Cloud(registrationDate: Date(), imageData: cvm.sticker?.pngData() ?? cvm.selectedImage?.jpegData(compressionQuality: 0.5 )))
                                 doYouWantRegister = false
                                 path = NavigationPath()
                             }

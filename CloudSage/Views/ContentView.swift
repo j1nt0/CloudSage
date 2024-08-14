@@ -6,18 +6,52 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
-    
+    @Environment(\.modelContext) private var modelContext: ModelContext
     @AppStorage("OnBoardingFinish") private var onBoarding: Bool = false
     @State var onBoardingFinish: Bool = false
+    @State var isDone: Bool = false
+    @State var isDonee: Bool = false
+    @Query var cloudDB: [CloudDB]
+    @State var cloudData = CloudData()
     
     var body: some View {
-        ZStack {
-            MainView()
-            if !onBoarding {
-                OnBoardingView(onBoardingFinish: $onBoardingFinish)
+        if !isDonee {
+            ProgressView()
+                .onAppear {
+                    addDefaultCloud()
+                }
+        } else {
+            ZStack {
+                if isDone {
+                    MainView(cloudData: $cloudData)
+                } else {
+                    ProgressView()
+                        .onAppear {
+                            doFirst()
+                        }
+                }
+                if !onBoarding {
+                    OnBoardingView(onBoardingFinish: $onBoardingFinish)
+                }
             }
+        }
+    }
+    
+    func doFirst() {
+        cloudData.clouds = cloudDB[0].clouds
+        isDone = true
+    }
+    private func addDefaultCloud() {
+        do {
+            let newCloud = CloudDB()
+            modelContext.insert(newCloud)
+            try modelContext.save()
+            isDonee = true
+        } catch {
+            print(error.localizedDescription)
         }
     }
 }

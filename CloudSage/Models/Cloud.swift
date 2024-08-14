@@ -7,8 +7,9 @@
 
 import Foundation
 import UIKit
+import SwiftData
 
-struct Cloud: Identifiable {
+struct Cloud: Identifiable, Codable {
     var id = UUID()
     var registrationDate: Date
     var image: UIImage? {
@@ -34,6 +35,46 @@ struct Cloud: Identifiable {
 @Observable
 class CloudData {
     var clouds: [Cloud] = []
+    
+    func resetData() {
+        // Cloud 객체를 직접 수정하려면, 배열 내의 요소를 수정 가능한 값으로 처리해야 합니다.
+        clouds = clouds.map { cloud in
+            var mutableCloud = cloud
+            mutableCloud.isShow = false
+            return mutableCloud
+        }
+    }
+    
+    func fetchData() {
+        clouds = clouds.map { cloud in
+            var mutableCloud = cloud
+            mutableCloud.imagePosition = mutableCloud.imagePositionReal
+            mutableCloud.isShow = mutableCloud.isShowReal
+            return mutableCloud
+        }
+    }
+    
+    func updateData() {
+        clouds = clouds.map { cloud in
+            var mutableCloud = cloud
+            mutableCloud.imagePositionReal = mutableCloud.imagePosition
+            mutableCloud.isShowReal = mutableCloud.isShow
+            return mutableCloud
+        }
+    }
+    
+    func removeData(index: Int) {
+        clouds.remove(at: index)
+    }
+}
+
+@Model
+class CloudDB {
+    var clouds: [Cloud]
+    
+    init() {
+        self.clouds = []
+    }
     
     func resetData() {
         // Cloud 객체를 직접 수정하려면, 배열 내의 요소를 수정 가능한 값으로 처리해야 합니다.

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct BeardOverviewView: View {
     
@@ -14,6 +15,7 @@ struct BeardOverviewView: View {
     @State var bovm = BeardOverviewViewModel()
     @Binding var path: NavigationPath
     @State var selectedRemoveCloudIndex: Int?
+    @Query var cloudDB: [CloudDB]
     
     var body: some View {
         ZStack {
@@ -33,12 +35,21 @@ struct BeardOverviewView: View {
                 SaveButton(isWhat: $bovm.doYouWantChange)
                     .padding(.bottom, 15)
             }
-            CustomBeardView(clouds: $cloudData.clouds)
+            CustomBeardView()
             doYouWantChangeView()
             doYouWantRemoveView(index: selectedRemoveCloudIndex ?? 0)
+            doYouWantRemoveAllView()
         }
         .onAppear {
             cloudData.fetchData()
+        }
+        .onDisappear {
+            for index in cloudData.clouds.indices {
+                if cloudData.clouds[index].isShowReal == false && cloudData.clouds[index].isShow == true {
+                    cloudData.clouds[index].isShow = false
+                }
+            }
+            cloudDB[0].clouds = cloudData.clouds
         }
     }
     func BeardBlock(cloud: Cloud) -> some View {
@@ -70,6 +81,10 @@ struct BeardOverviewView: View {
     func BeardBlockScrollView() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
+                VStack(spacing: 4) {
+                    ResetButton()
+                    DeleteButton()
+                }
                 ForEach(0..<cloudData.clouds.count) { rowIndex in
                     VStack(spacing: 4) {
                         ForEach(0..<2) { columnIndex in
@@ -128,7 +143,8 @@ struct BeardOverviewView: View {
                             }
                             .frame(width: 165, height: 54)
                             .onTapGesture {
-                                cloudData.updateData()                                
+                                cloudData.updateData()    
+                                cloudDB[0].clouds = cloudData.clouds
                                 path = NavigationPath()
                             }
                             ZStack {
@@ -185,6 +201,7 @@ struct BeardOverviewView: View {
                             .frame(width: 165, height: 54)
                             .onTapGesture {
                                 cloudData.removeData(index: index)
+                                cloudDB[0].clouds = cloudData.clouds
                                 bovm.doYouWantRemove = false
                             }
                             ZStack {
@@ -200,6 +217,63 @@ struct BeardOverviewView: View {
                             .frame(width: 165, height: 54)
                             .onTapGesture {
                                 bovm.doYouWantRemove = false
+                            }
+                        }
+                        .padding(.bottom, 19)
+                    }
+                }
+                    .frame(height: 194)
+                    .padding(.horizontal, 15)
+            }
+        }
+    }
+    @ViewBuilder
+    func doYouWantRemoveAllView() -> some View {
+        if bovm.doYouWantRemoveAll {
+            ZStack {
+                Color.black.opacity(0.3).ignoresSafeArea()
+                ZStack {
+                    RoundedRectangle(cornerRadius: 21)
+                        .foregroundStyle(.white)
+                    VStack {
+                        VStack(spacing: 10) {
+                            Text("모든 수염들을")
+                            Text("삭제할까요?")
+                        }
+                        .font(.system(size: 20, weight: .semibold))
+                        .foregroundStyle(.myBlack)
+                        .padding(.top, 36)
+                        Spacer()
+                        HStack(spacing: 9) {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 13)
+                                    .foregroundStyle(.sky01Shadow)
+                                    .offset(y: 5)
+                                RoundedRectangle(cornerRadius: 13)
+                                    .foregroundStyle(.sky01)
+                                Text("확인")
+                                    .font(.system(size: 18, weight: .bold))
+                                    .foregroundStyle(.white)
+                            }
+                            .frame(width: 165, height: 54)
+                            .onTapGesture {
+                                cloudData.clouds.removeAll()
+//                                cloudDB[0].clouds.removeAll()
+                                bovm.doYouWantRemoveAll = false
+                            }
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 13)
+                                    .foregroundStyle(.cancelGrayShadow)
+                                    .offset(y: 5)
+                                RoundedRectangle(cornerRadius: 13)
+                                    .foregroundStyle(.cancelGray)
+                                Text("취소")
+                                    .font(.system(size: 18, weight: .bold))
+                                    .foregroundStyle(.white)
+                            }
+                            .frame(width: 165, height: 54)
+                            .onTapGesture {
+                                bovm.doYouWantRemoveAll = false
                             }
                         }
                         .padding(.bottom, 19)
@@ -227,13 +301,38 @@ struct BeardOverviewView: View {
         }
         .frame(height: 88)
         .onTapGesture {
-            
+            cloudData.clouds = cloudData.clouds.map { cloud in
+                var mutableCloud = cloud
+                mutableCloud.isShow = false
+                mutableCloud.imagePosition = CGPoint(x: 8, y: 40)
+                return mutableCloud
+            }
         }
     }
-    func CustomBeardView(clouds: Binding<[Cloud]>) -> some View {
+    func DeleteButton() -> some View {
         ZStack {
-            ForEach(clouds.wrappedValue.indices, id: \.self) { index in
-                let cloud = clouds.wrappedValue[index]
+            RoundedRectangle(cornerRadius: 13)
+                .foregroundStyle(.whiteShadow)
+                .frame(width: 78, height: 78)
+                .offset(y: 4)
+            ZStack {
+                RoundedRectangle(cornerRadius: 13)
+                    .foregroundStyle(.white)
+                Image(.delete)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            }
+            .frame(width: 78, height: 78)
+        }
+        .frame(height: 88)
+        .onTapGesture {
+            bovm.doYouWantRemoveAll = true
+        }
+    }
+    func CustomBeardView() -> some View {
+        ZStack {
+            ForEach(cloudData.clouds.indices, id: \.self) { index in
+                let cloud = cloudData.clouds[index]
                 if cloud.isShow {
                     Image(uiImage: cloud.image!)
                         .resizable()
@@ -244,13 +343,13 @@ struct BeardOverviewView: View {
                             DragGesture()
                                 .onChanged { value in
                                     // 드래그가 진행될 때 이미지의 위치를 업데이트
-                                    clouds.wrappedValue[index].dragOffset = value.translation
+                                    cloudData.clouds[index].dragOffset = value.translation
                                 }
                                 .onEnded { value in
                                     // 드래그가 끝나면 최종 위치를 저장
-                                    clouds.wrappedValue[index].imagePosition.x += clouds.wrappedValue[index].dragOffset.width
-                                    clouds.wrappedValue[index].imagePosition.y += clouds.wrappedValue[index].dragOffset.height
-                                    clouds.wrappedValue[index].dragOffset = .zero
+                                    cloudData.clouds[index].imagePosition.x += cloudData.clouds[index].dragOffset.width
+                                    cloudData.clouds[index].imagePosition.y += cloudData.clouds[index].dragOffset.height
+                                    cloudData.clouds[index].dragOffset = .zero
                                 }
                         )
                 }

@@ -24,6 +24,7 @@ struct BeardOverviewView: View {
                 ZStack {
                     CloudSageDefaultImage()
                     CloudSageSkinImage(skin: vm.CloudSageSkin)
+                    CustomBeardView().offset(y: 190)
                 }
                 .padding(.top, 20)                    
                 Ellipse()
@@ -35,7 +36,6 @@ struct BeardOverviewView: View {
                 SaveButton(isWhat: $bovm.doYouWantChange)
                     .padding(.bottom, 15)
             }
-            CustomBeardView()
             doYouWantChangeView()
             doYouWantRemoveView(index: selectedRemoveCloudIndex ?? 0)
             doYouWantRemoveAllView()

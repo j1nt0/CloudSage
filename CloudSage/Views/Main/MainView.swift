@@ -19,7 +19,7 @@ struct MainView: View {
             let size = $0.size
             NavigationStack(path: $path) {
                 ZStack {
-                    Color.white.ignoresSafeArea()
+                    Color.sky01.ignoresSafeArea()
                     VStack(spacing: 0) {
                         ZStack {
                             CloudSageDefaultImage()
@@ -31,9 +31,11 @@ struct MainView: View {
                         .offset(y: 90)
                         Spacer()
                         Image(.speechBubbleBackground)
+                            .renderingMode(.template)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(maxWidth: .infinity)
+                            .foregroundStyle(.sky01RealShadow)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .ignoresSafeArea()
@@ -54,7 +56,9 @@ struct MainView: View {
                                     NavigationLink(value: "BeardDesignView") {
                                         SubButton(text: "스킨")
                                     }
-                                    SubButton(text: "공유")
+                                    NavigationLink(value: "ShareView") {
+                                        SubButton(text: "공유")
+                                    }
                                 }
                                 .frame(height: (size.width/2-12)/2-4.5)
                             }
@@ -72,6 +76,8 @@ struct MainView: View {
                         BeardOverviewView(cloudData: cloudData, vm: vm, path: $path)
                     } else if value == "BeardDesignView" {
                         BeardDesignView(vm: vm, path: $path)
+                    } else if value == "ShareView" {
+                        ShareView(vm: vm, cloudData: cloudData)
                     }
                 }
             }

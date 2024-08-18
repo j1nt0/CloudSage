@@ -28,6 +28,7 @@
 		3C31A4932C63FAF900A6D1F5 /* ToSquareImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4922C63FAF900A6D1F5 /* ToSquareImageExtension.swift */; };
 		3C31A4962C64D26000A6D1F5 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4952C64D26000A6D1F5 /* HapticManager.swift */; };
 		3C31A4982C64D8C800A6D1F5 /* BeardOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4972C64D8C800A6D1F5 /* BeardOverviewView.swift */; };
+		3C5DE00D2C71E21400A1D0B4 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 3C5DE00C2C71E21400A1D0B4 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		3C31A4922C63FAF900A6D1F5 /* ToSquareImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToSquareImageExtension.swift; sourceTree = "<group>"; };
 		3C31A4952C64D26000A6D1F5 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		3C31A4972C64D8C800A6D1F5 /* BeardOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeardOverviewView.swift; sourceTree = "<group>"; };
+		3C5DE00C2C71E21400A1D0B4 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 		3C31A4592C61328D00A6D1F5 /* CloudSage */ = {
 			isa = PBXGroup;
 			children = (
+				3C5DE00C2C71E21400A1D0B4 /* Localizable.xcstrings */,
 				3C31A4942C64D24400A6D1F5 /* Manager */,
 				3C31A4852C6398DF00A6D1F5 /* Models */,
 				3C31A4782C6264B600A6D1F5 /* Extension */,
@@ -257,6 +260,7 @@
 				en,
 				Base,
 				ko,
+				es,
 			);
 			mainGroup = 3C31A44E2C61328D00A6D1F5;
 			productRefGroup = 3C31A4582C61328D00A6D1F5 /* Products */;
@@ -275,6 +279,7 @@
 			files = (
 				3C31A4622C61328F00A6D1F5 /* Preview Assets.xcassets in Resources */,
 				3C31A45F2C61328F00A6D1F5 /* Assets.xcassets in Resources */,
+				3C5DE00D2C71E21400A1D0B4 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,8 +446,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "구름영감";
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need camera access to capture clouds and help you find unique beards.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need camera access to capture clouds and help you find unique beards.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -478,8 +483,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "구름영감";
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need camera access to capture clouds and help you find unique beards.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need camera access to capture clouds and help you find unique beards.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

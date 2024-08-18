@@ -97,7 +97,7 @@ struct MainView: View {
             }
         }
     }
-    func MainButton(text: String) -> some View {
+    func MainButton(text: LocalizedStringKey) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: 15)
                 .foregroundStyle(.whiteShadow)
@@ -122,7 +122,7 @@ struct MainView: View {
             }
         }
     }
-    func SubButton(text: String) -> some View {
+    func SubButton(text: LocalizedStringKey) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: 15)
                 .foregroundStyle(.whiteShadow)

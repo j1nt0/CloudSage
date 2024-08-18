@@ -11,11 +11,6 @@ struct OnBoardingView: View {
     
 //    @AppStorage("OnBoardingFinish") private var onBoarding: Bool = false
     @State private var currentIndex: Int = 0
-    let typewriterTextArray = [
-        "만나서 반갑다네.\n나는 구름영감이라고 하네.",
-        "며칠 전 잠깐 잠이 들었는데,\n수염이 모두 사라져버렸지 뭐야.",
-        "자네에게 내가 부탁을 좀 하겠네.\n내 수염을 모두 찾아와 줄 수 있겠나?"
-        ]
     @State private var showButton: Bool = false
     @Binding var onBoardingFinish: Bool
     
@@ -40,7 +35,7 @@ struct OnBoardingView: View {
                                 .frame(width: size.width-40)
                                 .padding(.top, 16)
                             if currentIndex == 0 {
-                                TypewriterText(fullText: typewriterTextArray[0],
+                                TypewriterText(fullText: "만나서 반갑다네.\n나는 구름영감이라고 하네.",
                                                charactersPerInterval: 1,
                                                interval: 0.1,
                                                font: .system(size: 20, weight: .regular),
@@ -53,7 +48,7 @@ struct OnBoardingView: View {
                                 .foregroundStyle(.white)
                                 .padding(.top, 35)
                             } else if currentIndex == 1 {
-                                TypewriterText(fullText: typewriterTextArray[1],
+                                TypewriterText(fullText: "며칠 전 잠깐 잠이 들었는데,\n수염이 모두 사라져버렸지 뭐야.",
                                                charactersPerInterval: 1,
                                                interval: 0.1,
                                                font: .system(size: 20, weight: .regular),
@@ -66,7 +61,7 @@ struct OnBoardingView: View {
                                 .foregroundStyle(.white)
                                 .padding(.top, 35)
                             } else if currentIndex == 2 {
-                                TypewriterText(fullText: typewriterTextArray[2],
+                                TypewriterText(fullText: "자네에게 내가 부탁을 좀 하겠네.\n내 수염을 모두 찾아와 줄 수 있겠나?",
                                                charactersPerInterval: 1,
                                                interval: 0.1,
                                                font: .system(size: 20, weight: .regular),

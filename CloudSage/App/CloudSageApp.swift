@@ -13,7 +13,7 @@ struct CloudSageApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .modelContainer(for: CloudDB.self)
+                .modelContainer(for: [SkinsData.self, CloudDB.self])
         }
     }
 }

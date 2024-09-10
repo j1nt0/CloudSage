@@ -17,11 +17,14 @@ struct ContentView: View {
     @Query var cloudDB: [CloudDB]
     @State var cloudData = CloudData()
     
+    @Query var skinDB: [SkinsData]
+    
     var body: some View {
         if !isDonee {
             ProgressView()
                 .onAppear {
                     addDefaultCloud()
+                    addDefaultSkin()
                 }
         } else {
             ZStack {
@@ -48,6 +51,17 @@ struct ContentView: View {
         do {
             let newCloud = CloudDB()
             modelContext.insert(newCloud)
+            try modelContext.save()
+            isDonee = true
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func addDefaultSkin() {
+        do {
+            let newSkin = SkinsData()
+            modelContext.insert(newSkin)
             try modelContext.save()
             isDonee = true
         } catch {

@@ -11,5 +11,6 @@ import Foundation
 class BeardDesignViewModel {
     var selectedSkin: Skin?
     var doYouWantChange: Bool = false
-    var skinData = SkinsData()
+    var doYouWantUnLock: Bool = false
+//    var skinData = SkinsData()
 }

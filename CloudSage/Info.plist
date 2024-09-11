@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3868631631541060~2199818853</string>
+	<key>GADIsAdManagerApp</key>
+	<string>1</string>
+	<key>GoogleMobileAdsKey</key>
+	<string>$(Google_Mobile_Ads_Key)</string>
+</dict>
+</plist>

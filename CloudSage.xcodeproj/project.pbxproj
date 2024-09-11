@@ -29,6 +29,9 @@
 		3C31A4962C64D26000A6D1F5 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4952C64D26000A6D1F5 /* HapticManager.swift */; };
 		3C31A4982C64D8C800A6D1F5 /* BeardOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C31A4972C64D8C800A6D1F5 /* BeardOverviewView.swift */; };
 		3C5DE00D2C71E21400A1D0B4 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 3C5DE00C2C71E21400A1D0B4 /* Localizable.xcstrings */; };
+		3CEF28232C90A29F009B66E7 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 3CEF28222C90A29F009B66E7 /* GoogleMobileAds */; };
+		3CEF28262C90A390009B66E7 /* GoogleMobileAdsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF28252C90A390009B66E7 /* GoogleMobileAdsManager.swift */; };
+		3CEF28292C91BB1D009B66E7 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEF28282C91BB1C009B66E7 /* Common.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +58,10 @@
 		3C31A4952C64D26000A6D1F5 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		3C31A4972C64D8C800A6D1F5 /* BeardOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeardOverviewView.swift; sourceTree = "<group>"; };
 		3C5DE00C2C71E21400A1D0B4 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		3CEF28242C90A340009B66E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3CEF28252C90A390009B66E7 /* GoogleMobileAdsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMobileAdsManager.swift; sourceTree = "<group>"; };
+		3CEF28282C91BB1C009B66E7 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		3CEF282A2C91EEEE009B66E7 /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CEF28232C90A29F009B66E7 /* GoogleMobileAds in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +87,7 @@
 		3C31A44E2C61328D00A6D1F5 = {
 			isa = PBXGroup;
 			children = (
+				3CEF282A2C91EEEE009B66E7 /* Secrets.xcconfig */,
 				3C31A4592C61328D00A6D1F5 /* CloudSage */,
 				3C31A4582C61328D00A6D1F5 /* Products */,
 			);
@@ -95,6 +104,7 @@
 		3C31A4592C61328D00A6D1F5 /* CloudSage */ = {
 			isa = PBXGroup;
 			children = (
+				3CEF28242C90A340009B66E7 /* Info.plist */,
 				3C5DE00C2C71E21400A1D0B4 /* Localizable.xcstrings */,
 				3C31A4942C64D24400A6D1F5 /* Manager */,
 				3C31A4852C6398DF00A6D1F5 /* Models */,
@@ -119,6 +129,7 @@
 		3C31A4722C62632F00A6D1F5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3CEF28272C91BB0C009B66E7 /* Component */,
 				3C18B2702C6CF83F00C4C1CA /* Share */,
 				3C31A47D2C626E6C00A6D1F5 /* BeardTrack */,
 				3C31A47C2C626E3300A6D1F5 /* BeardOverview */,
@@ -213,8 +224,17 @@
 			isa = PBXGroup;
 			children = (
 				3C31A4952C64D26000A6D1F5 /* HapticManager.swift */,
+				3CEF28252C90A390009B66E7 /* GoogleMobileAdsManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		3CEF28272C91BB0C009B66E7 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				3CEF28282C91BB1C009B66E7 /* Common.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +253,9 @@
 			dependencies = (
 			);
 			name = CloudSage;
+			packageProductDependencies = (
+				3CEF28222C90A29F009B66E7 /* GoogleMobileAds */,
+			);
 			productName = CloudSage;
 			productReference = 3C31A4572C61328D00A6D1F5 /* CloudSage.app */;
 			productType = "com.apple.product-type.application";
@@ -263,6 +286,9 @@
 				es,
 			);
 			mainGroup = 3C31A44E2C61328D00A6D1F5;
+			packageReferences = (
+				3CEF28212C90A29F009B66E7 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+			);
 			productRefGroup = 3C31A4582C61328D00A6D1F5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -297,11 +323,13 @@
 				3C31A48B2C63E59400A6D1F5 /* Cloud.swift in Sources */,
 				3C31A48D2C63E94500A6D1F5 /* CameraView.swift in Sources */,
 				3C31A45B2C61328D00A6D1F5 /* CloudSageApp.swift in Sources */,
+				3CEF28262C90A390009B66E7 /* GoogleMobileAdsManager.swift in Sources */,
 				3C31A47F2C626E9400A6D1F5 /* BeardDesignView.swift in Sources */,
 				3C31A4982C64D8C800A6D1F5 /* BeardOverviewView.swift in Sources */,
 				3C31A47A2C6264D100A6D1F5 /* CornerRadiusExtension.swift in Sources */,
 				3C31A4712C6262BB00A6D1F5 /* OnBoardingView.swift in Sources */,
 				3C31A4772C62641B00A6D1F5 /* MainView.swift in Sources */,
+				3CEF28292C91BB1D009B66E7 /* Common.swift in Sources */,
 				3C31A4692C613F8600A6D1F5 /* TypeWriterTextView.swift in Sources */,
 				3C31A4892C63BB3600A6D1F5 /* Skin.swift in Sources */,
 				3C31A4932C63FAF900A6D1F5 /* ToSquareImageExtension.swift in Sources */,
@@ -317,6 +345,7 @@
 /* Begin XCBuildConfiguration section */
 		3C31A4632C61328F00A6D1F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3CEF282A2C91EEEE009B66E7 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -380,6 +409,7 @@
 		};
 		3C31A4642C61328F00A6D1F5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3CEF282A2C91EEEE009B66E7 /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -436,6 +466,7 @@
 		};
 		3C31A4662C61328F00A6D1F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3CEF282A2C91EEEE009B66E7 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -445,6 +476,7 @@
 				DEVELOPMENT_TEAM = C5ZC74W3Z4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CloudSage/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "구름영감";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need camera access to capture clouds and help you find unique beards.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need camera access to capture clouds and help you find unique beards.";
@@ -473,6 +505,7 @@
 		};
 		3C31A4672C61328F00A6D1F5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3CEF282A2C91EEEE009B66E7 /* Secrets.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -482,6 +515,7 @@
 				DEVELOPMENT_TEAM = C5ZC74W3Z4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CloudSage/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "구름영감";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need camera access to capture clouds and help you find unique beards.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need camera access to capture clouds and help you find unique beards.";
@@ -530,6 +564,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3CEF28212C90A29F009B66E7 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3CEF28222C90A29F009B66E7 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3CEF28212C90A29F009B66E7 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3C31A44F2C61328D00A6D1F5 /* Project object */;
 }

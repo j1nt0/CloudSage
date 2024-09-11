@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import GoogleMobileAds
 
 struct BeardDesignView: View {
     
@@ -14,6 +15,9 @@ struct BeardDesignView: View {
     @State var bdvm = BeardDesignViewModel()
     @Binding var path: NavigationPath
     @Query var skinDB: [SkinsData]
+    @ObservedObject var viewModel = RewardedViewModel()
+    @State var myPoint: Int = 0
+    @State var canIShacking: Bool = false
     
     var body: some View {
         ZStack {
@@ -44,14 +48,35 @@ struct BeardDesignView: View {
                 SaveButtonInDesingView()
                     .padding(.bottom, 15)
             }
+            VStack {
+                HStack {
+                    Spacer()
+                    HStack(spacing: 5) {
+                        Image("coinImage")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 19)
+                        Text(String(myPoint))
+                            .font(.system(size: 20, weight: .bold))
+                            .foregroundStyle(.coin)
+                    }
+                }
+                Spacer()
+            }
+            .padding(.horizontal, 15)
             doYouWantChangeView()
             doYouWantUnLockView()
         }
         .onAppear {
             bdvm.selectedSkin = vm.CloudSageSkin
+            Task {
+                await viewModel.loadAd()
+            }
         }
     }
-    
+}
+
+extension BeardDesignView {
     @ViewBuilder
     func BeardBlock(skin: Skin) -> some View {
         if skin.isUnLock {
@@ -168,11 +193,12 @@ struct BeardDesignView: View {
                         .padding(.bottom, 19)
                     }
                 }
-                    .frame(height: 194)
-                    .padding(.horizontal, 15)
+                .frame(height: 194)
+                .padding(.horizontal, 15)
             }
         }
     }
+    
     @ViewBuilder
     func doYouWantUnLockView() -> some View {
         if bdvm.doYouWantUnLock {
@@ -201,19 +227,28 @@ struct BeardDesignView: View {
                                     RoundedRectangle(cornerRadius: 13)
                                         .foregroundStyle(.sky01)
                                     HStack(spacing: 5) {
-                                        Image(systemName: "eurosign.circle.fill")
+                                        Image("coinImage")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 19)
                                         Text("700")
+                                            .font(.system(size: 20, weight: .bold))
+                                            .foregroundStyle(.coin)
                                     }
-                                    .font(.system(size: 20, weight: .bold))
-                                    .foregroundStyle(.coin)
+                                    .rotationEffect(Angle(degrees: rotateDegree())) // 흔들릴 각도 설정
+                                    .animation(
+                                        Animation.easeInOut(duration: 0.1)
+                                            .repeatCount(canIShacking ? 5 : 0, autoreverses: true), // 1초 동안 반복
+                                        value: canIShacking
+                                    )
                                 }
                                 .frame(width: 206, height: 54)
                                 .onTapGesture {
-                                    bdvm.selectedSkin?.isUnLock = true
-                                    if let index = skinDB[0].skins.firstIndex(where: { $0.skinTitle == bdvm.selectedSkin?.skinTitle }) {
-                                        skinDB[0].skins[index].isUnLock = true
-                                        }
-                                    bdvm.doYouWantUnLock = false
+                                    canIShacking = true
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        canIShacking = false
+                                    }
+//                                    bdvm.doYouWantUnLock = false
                                 }
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 13)
@@ -227,6 +262,16 @@ struct BeardDesignView: View {
                                 }
                                 .frame(width: 115, height: 54)
                                 .onTapGesture {
+                                    viewModel.showAd()
+                                    
+                                    if viewModel.success {
+                                        bdvm.selectedSkin?.isUnLock = true
+                                        if let index = skinDB[0].skins.firstIndex(where: { $0.skinTitle == bdvm.selectedSkin?.skinTitle }) {
+                                            skinDB[0].skins[index].isUnLock = true
+                                        }
+                                        
+                                        viewModel.offSuccess()
+                                    }
                                     bdvm.doYouWantUnLock = false
                                 }
                             }
@@ -240,11 +285,12 @@ struct BeardDesignView: View {
                         .padding(.bottom, 17)
                     }
                 }
-                    .frame(height: 220)
-                    .padding(.horizontal, 15)
+                .frame(height: 220)
+                .padding(.horizontal, 15)
             }
         }
     }
+    
     @ViewBuilder
     func SaveButtonInDesingView() -> some View {
         if let isUnLock = bdvm.selectedSkin?.isUnLock {
@@ -283,47 +329,16 @@ struct BeardDesignView: View {
             EmptyView()
         }
     }
-
-}
-func SaveButton(isWhat: Binding<Bool>) -> some View {
-    ZStack {
-        RoundedRectangle(cornerRadius: 13)
-            .foregroundStyle(.whiteShadow)
-            .offset(y: 5)
-        RoundedRectangle(cornerRadius: 13)
-            .foregroundStyle(.white)
-        Text("저장")
-            .font(.system(size: 20, weight: .bold))
-            .foregroundStyle(.sky01)
-    }
-    .onTapGesture {
-        isWhat.wrappedValue = true
-    }
-    .frame(width: 99, height: 54)
-}
-
-func CloudSageDefaultImage() -> some View {
-    Image(.nonCloudSageLogo)
-        .resizable()
-        .aspectRatio(contentMode: .fit)
-        .frame(width: 300)
-}
-
-func CloudSageSkinImage(skin: Skin) -> some View {
-        if skin.skinString == "SkinNone" {
-            Image("")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 300)
+    func rotateDegree() -> CGFloat {
+        if canIShacking {
+            return canIShacking ? 5 : -5
         } else {
-            Image(skin.skinString)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 300)
+            return 0
         }
+    }
 }
 
 #Preview {
-//    BeardDesignView(vm: MainViewModel(), path: .constant(NavigationPath()))
+    //    BeardDesignView(vm: MainViewModel(), path: .constant(NavigationPath()))
     BeardDesignView(vm: MainViewModel(), path: .constant(.init()))
 }

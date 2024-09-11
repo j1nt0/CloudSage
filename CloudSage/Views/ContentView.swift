@@ -7,8 +7,10 @@
 
 import SwiftUI
 import SwiftData
+import GoogleMobileAds
 
 struct ContentView: View {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.modelContext) private var modelContext: ModelContext
     @AppStorage("OnBoardingFinish") private var onBoarding: Bool = false
     @State var onBoardingFinish: Bool = false

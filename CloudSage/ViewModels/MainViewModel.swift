@@ -9,5 +9,5 @@ import SwiftUI
 
 @Observable
 class MainViewModel {
-    var CloudSageSkin: Skin = Skin(skinTitle: "수염이 없수염", skinString: "skinNone", isPremium: false, isUnLock: true)
+    var CloudSageSkin: Skin = Skin(skinTitle: "수염이 없수염", skinString: "skinNone", isPremium: false, isUnLock: true, price: 0)
 }

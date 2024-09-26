@@ -16,8 +16,15 @@ struct BeardDesignView: View {
     @Binding var path: NavigationPath
     @Query var skinDB: [SkinsData]
     @ObservedObject var viewModel = RewardedViewModel()
-    @State var myPoint: Int = 0
+//    @State var myPoint: Int = 600
     @State var canIShacking: Bool = false
+    @AppStorage("Point") private var point: Int = 0
+    @AppStorage("Date") private var attendanceDate: String = "2024-09-25"
+    @State var a = ""
+    @State var b = ""
+    @State var randomPoint = 0
+    
+    let points = [20, 30, 40, 50]
     
     var body: some View {
         ZStack {
@@ -25,7 +32,7 @@ struct BeardDesignView: View {
             VStack(spacing: 0) {
                 ZStack {
                     CloudSageDefaultImage()
-                    CloudSageSkinImage(skin: bdvm.selectedSkin ?? Skin(skinTitle: "수염이 없수염", skinString: "skinNone", isPremium: false, isUnLock: true))
+                    CloudSageSkinImage(skin: bdvm.selectedSkin ?? Skin(skinTitle: "수염이 없수염", skinString: "skinNone", isPremium: false, isUnLock: true, price: 0))
                 }
                 .padding(.top, 20)
                 Ellipse()
@@ -48,27 +55,15 @@ struct BeardDesignView: View {
                 SaveButtonInDesingView()
                     .padding(.bottom, 15)
             }
-            VStack {
-                HStack {
-                    Spacer()
-                    HStack(spacing: 5) {
-                        Image("coinImage")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 19)
-                        Text(String(myPoint))
-                            .font(.system(size: 20, weight: .bold))
-                            .foregroundStyle(.coin)
-                    }
-                }
-                Spacer()
-            }
-            .padding(.horizontal, 15)
+            PointView()
             doYouWantChangeView()
             doYouWantUnLockView()
+            doYouWantEarnPointView()
+            acquireView(aText: a, bText: b)
         }
         .onAppear {
             bdvm.selectedSkin = vm.CloudSageSkin
+            checkDate()
             Task {
                 await viewModel.loadAd()
             }
@@ -231,7 +226,7 @@ extension BeardDesignView {
                                             .resizable()
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 19)
-                                        Text("700")
+                                        Text(String(bdvm.selectedSkin?.price ?? 0))
                                             .font(.system(size: 20, weight: .bold))
                                             .foregroundStyle(.coin)
                                     }
@@ -244,36 +239,49 @@ extension BeardDesignView {
                                 }
                                 .frame(width: 206, height: 54)
                                 .onTapGesture {
-                                    canIShacking = true
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                        canIShacking = false
-                                    }
-//                                    bdvm.doYouWantUnLock = false
-                                }
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 13)
-                                        .foregroundStyle(.sky01Shadow)
-                                        .offset(y: 5)
-                                    RoundedRectangle(cornerRadius: 13)
-                                        .foregroundStyle(.sky01)
-                                    Image(systemName: "play.rectangle.fill")
-                                        .font(.system(size: 20, weight: .bold))
-                                        .foregroundStyle(.white)
-                                }
-                                .frame(width: 115, height: 54)
-                                .onTapGesture {
-                                    viewModel.showAd()
-                                    
-                                    if viewModel.success {
+                                    guard let selectedSkin = bdvm.selectedSkin else { return }
+                                    if point < selectedSkin.price {
+                                        canIShacking = true
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                            canIShacking = false
+                                        }
+                                    } else {
+                                        // selectedSkin 안됨
                                         bdvm.selectedSkin?.isUnLock = true
                                         if let index = skinDB[0].skins.firstIndex(where: { $0.skinTitle == bdvm.selectedSkin?.skinTitle }) {
                                             skinDB[0].skins[index].isUnLock = true
                                         }
-                                        
-                                        viewModel.offSuccess()
+                                        point -= selectedSkin.price
+//                                        UserDefaults.standard.setValue(onBoardingFinish, forKey: "OnBoardingFinish")
+                                        bdvm.doYouWantUnLock = false
                                     }
-                                    bdvm.doYouWantUnLock = false
                                 }
+                                // MARK: - 영상 시청 광고 시작
+//                                ZStack {
+//                                    RoundedRectangle(cornerRadius: 13)
+//                                        .foregroundStyle(.sky01Shadow)
+//                                        .offset(y: 5)
+//                                    RoundedRectangle(cornerRadius: 13)
+//                                        .foregroundStyle(.sky01)
+//                                    Image(systemName: "play.rectangle.fill")
+//                                        .font(.system(size: 20, weight: .bold))
+//                                        .foregroundStyle(.white)
+//                                }
+//                                .frame(width: 115, height: 54)
+//                                .onTapGesture {
+//                                    viewModel.showAd()
+//                                    
+//                                    if viewModel.success {
+//                                        bdvm.selectedSkin?.isUnLock = true
+//                                        if let index = skinDB[0].skins.firstIndex(where: { $0.skinTitle == bdvm.selectedSkin?.skinTitle }) {
+//                                            skinDB[0].skins[index].isUnLock = true
+//                                        }
+//                                        
+//                                        viewModel.offSuccess()
+//                                    }
+//                                    bdvm.doYouWantUnLock = false
+//                                }
+                                // MARK: - 영상 시청 광고 끝
                             }
                             Text("Not Now")
                                 .font(.system(size: 13, weight: .bold))
@@ -334,6 +342,213 @@ extension BeardDesignView {
             return canIShacking ? 5 : -5
         } else {
             return 0
+        }
+    }
+    func PointView() -> some View {
+        VStack {
+            HStack {
+                Spacer()
+                ZStack {
+                    Image(.coinBackground)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    HStack {
+                        HStack(spacing: 5) {
+                            Image("coinImage")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 19)
+                            Text(String(point))
+                                .font(.system(size: 20, weight: .bold))
+                                .foregroundStyle(.coin)
+                        }
+                        Spacer()
+                    }
+                    .padding(.leading, 9)
+                }
+                .frame(width: 100)
+                .onTapGesture {
+                    bdvm.doYouWantEarnPoint = true
+                }
+            }
+            Spacer()
+        }
+    }
+    
+    @ViewBuilder
+    func doYouWantEarnPointView() -> some View {
+        if bdvm.doYouWantEarnPoint {
+            ZStack {
+                Color.black.opacity(0.3).ignoresSafeArea()
+                ZStack {
+                    RoundedRectangle(cornerRadius: 21)
+                        .foregroundStyle(.white)
+                    VStack(spacing: 0) {
+                        VStack(spacing: 42) {
+                            // 출석 도장
+                            HStack(alignment: .top, spacing: 0) {
+                                EarnPointVStack(aText: "출석 도장", bText: "10")
+                                Spacer()
+                                if bdvm.isAttendance {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 13)
+                                            .foregroundStyle(.cancelGrayShadow)
+                                            .offset(y: 5)
+                                        RoundedRectangle(cornerRadius: 13)
+                                            .foregroundStyle(.cancelGray)
+                                        Text("완료")
+                                            .font(.system(size: 20, weight: .bold))
+                                            .foregroundStyle(.white)
+                                    }
+                                    .frame(width: 109, height: 54)
+                                } else {
+                                    EarnPointButton(cText: "무료")
+                                        .onTapGesture {
+                                            bdvm.doYouWantEarnPoint = false
+                                            point += 10
+                                            bdvm.isAttendance = true
+                                            attendanceDate = dateToString(date: Date())
+                                            a = "10"
+                                            b = "출석했습니다!"
+                                            bdvm.didYouAcquirePoint = true
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                                withAnimation {
+                                                    bdvm.didYouAcquirePoint = false
+                                                }
+                                            }
+                                        }
+                                }
+                                
+                            }
+                            // 광고 시청
+                            HStack(alignment: .top, spacing: 0) {
+                                EarnPointVStack(aText: "광고 시청", bText: "20 ~ 50")
+                                Spacer()
+                                EarnPointButton(cText: "무료")
+                                    .onTapGesture {
+                                        viewModel.showAd()
+
+                                        if viewModel.success {
+                                            randomPoint = points.randomElement()!
+                                            point += randomPoint
+                                            viewModel.offSuccess()
+                                        }
+                                        bdvm.doYouWantEarnPoint = false
+                                        a = "\(randomPoint)"
+                                        b = "획득했습니다!"
+                                        bdvm.didYouAcquirePoint = true
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                            withAnimation {
+                                                bdvm.didYouAcquirePoint = false
+                                            }
+                                        }
+                                    }
+                            }
+                            HStack(alignment: .top, spacing: 0) {
+                                EarnPointVStack(aText: "코인 구매", bText: "100")
+                                Spacer()
+                                EarnPointButton(cText: "₩1,100")
+                            }
+                        }
+                        .padding(.top, 42)
+                        Spacer()
+                        Text("Not Now")
+                            .font(.system(size: 13, weight: .bold))
+                            .foregroundStyle(.sky01)
+                            .onTapGesture {
+                                bdvm.doYouWantEarnPoint = false
+                            }
+                            .padding(.bottom, 17)
+                    }
+                    .padding(.horizontal, 18)
+                }
+                .frame(height: 371)
+                .padding(.horizontal, 15)
+            }
+        }
+    }
+    
+    func EarnPointVStack(aText: String, bText: String) -> some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text(aText)
+                .font(.system(size: 13, weight: .bold))
+                .foregroundStyle(.mainSubFont)
+            HStack(spacing: 5) {
+                Image("coinImage")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 19, height: 19)
+                Text(bText)
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundStyle(.coin)
+            }
+        }
+    }
+    
+    func EarnPointButton(cText: String) -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 13)
+                .foregroundStyle(.sky01Shadow)
+                .offset(y: 5)
+            RoundedRectangle(cornerRadius: 13)
+                .foregroundStyle(.sky01)
+            Text(cText)
+                .font(.system(size: 20, weight: .bold))
+                .foregroundStyle(.white)
+        }
+        .frame(width: 109, height: 54)
+    }
+    
+    func dateToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+        let formattedDate = dateFormatter.string(from: date)
+        
+        return formattedDate
+    }
+    
+    func checkDate() {
+        let todayDate = Date()
+
+        if attendanceDate == dateToString(date: todayDate) {
+            bdvm.isAttendance = true
+        } else {
+            bdvm.isAttendance = false
+        }
+        print(attendanceDate)
+    }
+    
+    @ViewBuilder
+    func acquireView(aText: String, bText: String) -> some View {
+        if bdvm.didYouAcquirePoint {
+            ZStack {
+                Color.black.opacity(0.3).ignoresSafeArea()
+                ZStack {
+                    RoundedRectangle(cornerRadius: 21)
+                        .foregroundStyle(.white)
+                    VStack(spacing: 17) {
+                        Spacer()
+                        HStack(spacing: 5) {
+                            Image("coinImage")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 25, height: 25)
+                            Text(aText)
+                                .font(.system(size: 26, weight: .bold))
+                                .foregroundStyle(.coin)
+                        }
+                        .padding(.top, 30)
+                        Text(bText)
+                            .font(.system(size: 20, weight: .semibold))
+                            .foregroundStyle(.myBlack)
+                            .padding(.bottom, 30)
+                        Spacer()
+                    }
+                }
+                .frame(height: 100)
+                .padding(.horizontal, 15)
+            }
         }
     }
 }

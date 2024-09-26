@@ -309,7 +309,7 @@ struct BeardOverviewView: View {
             }
         }
     }
-    func DeleteButton() -> some View {
+    func DeleteButton() -> some View {        
         ZStack {
             RoundedRectangle(cornerRadius: 13)
                 .foregroundStyle(.whiteShadow)

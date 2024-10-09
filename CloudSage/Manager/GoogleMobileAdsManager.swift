@@ -5,6 +5,7 @@
 //  Created by Jin Lee on 9/11/24.
 //
 
+import SwiftUI
 import GoogleMobileAds
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 class RewardedViewModel: NSObject, ObservableObject, GADFullScreenContentDelegate {
 //  @Published var coins = 0
     @Published var success = false
+    @Published var adFinished = false
     private var rewardedAd: GADRewardedAd?
 
   func loadAd() async {
@@ -86,6 +88,12 @@ class RewardedViewModel: NSObject, ObservableObject, GADFullScreenContentDelegat
 
   func adWillDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
     print("\(#function) called")
+    adFinished = true
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+          withAnimation {
+              self.adFinished = false
+          }
+      }
   }
 
   func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {

@@ -60,6 +60,7 @@ struct BeardDesignView: View {
             doYouWantUnLockView()
             doYouWantEarnPointView()
             acquireView(aText: a, bText: b)
+            acquireView2(aText: a, bText: b)
         }
         .onAppear {
             bdvm.selectedSkin = vm.CloudSageSkin
@@ -349,7 +350,7 @@ extension BeardDesignView {
             HStack {
                 Spacer()
                 ZStack {
-                    Image(.coinBackground)
+                    Image(.myPointBackground)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                     HStack {
@@ -363,10 +364,16 @@ extension BeardDesignView {
                                 .foregroundStyle(.coin)
                         }
                         Spacer()
+                        Image(systemName: "plus.app.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24)
+                            .foregroundStyle(LinearGradient(colors: [.sky01, .sky02], startPoint: .top, endPoint: .bottom))
+                            .padding(.trailing, 10)
                     }
                     .padding(.leading, 9)
                 }
-                .frame(width: 100)
+                .frame(width: 125)
                 .onTapGesture {
                     bdvm.doYouWantEarnPoint = true
                 }
@@ -411,7 +418,7 @@ extension BeardDesignView {
                                             a = "10"
                                             b = "출석했습니다!"
                                             bdvm.didYouAcquirePoint = true
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                                 withAnimation {
                                                     bdvm.didYouAcquirePoint = false
                                                 }
@@ -426,24 +433,41 @@ extension BeardDesignView {
                                 Spacer()
                                 EarnPointButton(cText: "무료")
                                     .onTapGesture {
+//                                        viewModel.showAd()
+//
+//                                        if viewModel.success {
+//                                            randomPoint = points.randomElement()!
+//                                            point += randomPoint
+//                                            
+//                                            bdvm.doYouWantEarnPoint = false
+//                                            a = "\(randomPoint)"
+//                                            b = "획득했습니다!"
+//                                            bdvm.didYouAcquirePoint = true
+//                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+//                                                withAnimation {
+//                                                    bdvm.didYouAcquirePoint = false
+//                                                }
+//                                            }
+//                                            
+//                                            viewModel.offSuccess()
+//                                        }           
                                         viewModel.showAd()
-
-                                        if viewModel.success {
-                                            randomPoint = points.randomElement()!
-                                            point += randomPoint
-                                            viewModel.offSuccess()
-                                        }
+                                        
+                                        randomPoint = points.randomElement()!
+//                                        point += randomPoint
+                                        
                                         bdvm.doYouWantEarnPoint = false
                                         a = "\(randomPoint)"
                                         b = "획득했습니다!"
-                                        bdvm.didYouAcquirePoint = true
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                                            withAnimation {
-                                                bdvm.didYouAcquirePoint = false
-                                            }
-                                        }
+//                                        bdvm.didYouAcquirePoint = true
+//                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                                            withAnimation {
+//                                                bdvm.didYouAcquirePoint = false
+//                                            }
+//                                        }
                                     }
                             }
+                            // 코인 구매
                             HStack(alignment: .top, spacing: 0) {
                                 EarnPointVStack(aText: "코인 구매", bText: "100")
                                 Spacer()
@@ -521,9 +545,12 @@ extension BeardDesignView {
     
     @ViewBuilder
     func acquireView(aText: String, bText: String) -> some View {
-        if bdvm.didYouAcquirePoint {
+        if viewModel.adFinished {
             ZStack {
                 Color.black.opacity(0.3).ignoresSafeArea()
+                    .onTapGesture {
+                        viewModel.adFinished = false
+                    }
                 ZStack {
                     RoundedRectangle(cornerRadius: 21)
                         .foregroundStyle(.white)
@@ -548,6 +575,47 @@ extension BeardDesignView {
                 }
                 .frame(height: 100)
                 .padding(.horizontal, 15)
+            }
+            .onAppear {
+                point += randomPoint
+            }
+        }
+    }
+    @ViewBuilder
+    func acquireView2(aText: String, bText: String) -> some View {
+        if bdvm.didYouAcquirePoint {
+            ZStack {
+                Color.black.opacity(0.3).ignoresSafeArea()
+                    .onTapGesture {
+                        bdvm.didYouAcquirePoint = false
+                    }
+                ZStack {
+                    RoundedRectangle(cornerRadius: 21)
+                        .foregroundStyle(.white)
+                    VStack(spacing: 17) {
+                        Spacer()
+                        HStack(spacing: 5) {
+                            Image("coinImage")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 25, height: 25)
+                            Text(aText)
+                                .font(.system(size: 26, weight: .bold))
+                                .foregroundStyle(.coin)
+                        }
+                        .padding(.top, 30)
+                        Text(bText)
+                            .font(.system(size: 20, weight: .semibold))
+                            .foregroundStyle(.myBlack)
+                            .padding(.bottom, 30)
+                        Spacer()
+                    }
+                }
+                .frame(height: 100)
+                .padding(.horizontal, 15)
+            }
+            .onAppear {
+                point += randomPoint
             }
         }
     }

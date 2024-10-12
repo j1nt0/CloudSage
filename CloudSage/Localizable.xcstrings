@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "ko",
   "strings" : {
+    "" : {
+
+    },
     "'%@'" : {
 
     },
@@ -39,6 +42,15 @@
     "%@" : {
 
     },
+    "%lld" : {
+
+    },
+    "₩1,100" : {
+
+    },
+    "10" : {
+
+    },
     "Not Now" : {
 
     },
@@ -71,6 +83,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enviar"
+          }
+        }
+      }
+    },
+    "광고 시청" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Watch Advertisement"
           }
         }
       }
@@ -185,6 +207,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "¿Debería eliminar todos los bigotes?"
+          }
+        }
+      }
+    },
+    "무료" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Free"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gratis"
           }
         }
       }
@@ -305,7 +343,20 @@
       }
     },
     "완료" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completed"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completado"
+          }
+        }
+      }
     },
     "자네에게 내가 부탁을 좀 하겠네.\\n내 수염을 모두 찾아와 줄 수 있겠나?" : {
       "extractionState" : "manual",
@@ -372,6 +423,38 @@
         }
       }
     },
+    "출석 도장" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attendance Stamp"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sello de Asistencia"
+          }
+        }
+      }
+    },
+    "출석했습니다!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attendance Confirmed!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Asistencia Confirmada!"
+          }
+        }
+      }
+    },
     "취소" : {
       "localizations" : {
         "en" : {
@@ -384,6 +467,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
+          }
+        }
+      }
+    },
+    "코인 구매" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buy Coins"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comprar Monedas"
           }
         }
       }
@@ -408,10 +507,52 @@
 
     },
     "획득" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acquire"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acquire"
+          }
+        }
+      }
     },
     "획득할까요?" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Will you acquire it?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Lo adquirirás?"
+          }
+        }
+      }
+    },
+    "획득했습니다!" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acquired!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Adquirido!"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

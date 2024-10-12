@@ -20,8 +20,8 @@ struct BeardDesignView: View {
     @State var canIShacking: Bool = false
     @AppStorage("Point") private var point: Int = 0
     @AppStorage("Date") private var attendanceDate: String = "2024-09-25"
-    @State var a = ""
-    @State var b = ""
+    @State var a: LocalizedStringKey = ""
+    @State var b: LocalizedStringKey = ""
     @State var randomPoint = 0
     
     let points = [20, 30, 40, 50]
@@ -492,7 +492,7 @@ extension BeardDesignView {
         }
     }
     
-    func EarnPointVStack(aText: String, bText: String) -> some View {
+    func EarnPointVStack(aText: LocalizedStringKey, bText: String) -> some View {
         VStack(alignment: .leading, spacing: 5) {
             Text(aText)
                 .font(.system(size: 13, weight: .bold))
@@ -509,7 +509,7 @@ extension BeardDesignView {
         }
     }
     
-    func EarnPointButton(cText: String) -> some View {
+    func EarnPointButton(cText: LocalizedStringKey) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: 13)
                 .foregroundStyle(.sky01Shadow)
@@ -544,7 +544,7 @@ extension BeardDesignView {
     }
     
     @ViewBuilder
-    func acquireView(aText: String, bText: String) -> some View {
+    func acquireView(aText: LocalizedStringKey, bText: LocalizedStringKey) -> some View {
         if viewModel.adFinished {
             ZStack {
                 Color.black.opacity(0.3).ignoresSafeArea()
@@ -582,7 +582,7 @@ extension BeardDesignView {
         }
     }
     @ViewBuilder
-    func acquireView2(aText: String, bText: String) -> some View {
+    func acquireView2(aText: LocalizedStringKey, bText: LocalizedStringKey) -> some View {
         if bdvm.didYouAcquirePoint {
             ZStack {
                 Color.black.opacity(0.3).ignoresSafeArea()
